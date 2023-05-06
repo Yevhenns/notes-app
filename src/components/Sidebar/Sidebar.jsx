@@ -1,10 +1,11 @@
+import ListItem from "../ListItem/ListItem";
 import css from "./Sidebar.module.css";
 
 const Sidebar = () => {
   return (
     <div className={css.sidebar}>
       <ul>
-        <li>Sidebar</li>
+        <ListItem />
       </ul>
     </div>
   );

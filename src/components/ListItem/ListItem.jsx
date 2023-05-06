@@ -1,9 +1,8 @@
 const ListItem = () => {
   return (
-    <div>
+    <li>
       <p>text</p>
-      <p>date</p>
-    </div>
+    </li>
   );
 };
 
