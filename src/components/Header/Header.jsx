@@ -2,10 +2,10 @@ import HeaderButtonSet from "../HeaderButtonSet/HeaderButtonSet";
 import SearchBox from "../SearchBox/SearchBox ";
 import css from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ addNewNote }) => {
   return (
     <header className={css.header}>
-      <HeaderButtonSet />
+      <HeaderButtonSet addNewNote={addNewNote} />
       <SearchBox />
     </header>
   );

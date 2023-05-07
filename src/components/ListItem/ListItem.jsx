@@ -1,7 +1,7 @@
-const ListItem = () => {
+const ListItem = ({ id, text, showNote }) => {
   return (
-    <li>
-      <p>text</p>
+    <li onClick={() => showNote(id)}>
+      <p>{text}</p>
     </li>
   );
 };
