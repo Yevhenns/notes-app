@@ -1,10 +1,16 @@
 import css from "./Workspace.module.css";
 
-const Workspace = () => {
+const Workspace = ({ currentNote, editMode }) => {
+  const { id, text } = currentNote;
+
   return (
     <div className={css.wrapper}>
-      <p>date</p>
-      <textarea className={css.textarea}></textarea>
+      <p>{id}</p>
+      {editMode === false ? (
+        <p>{text}</p>
+      ) : (
+        <textarea className={css.textarea} defaultValue={text}></textarea>
+      )}
     </div>
   );
 };

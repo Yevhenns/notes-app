@@ -2,10 +2,15 @@ import HeaderButtonSet from "../HeaderButtonSet/HeaderButtonSet";
 import SearchBox from "../SearchBox/SearchBox ";
 import css from "./Header.module.css";
 
-const Header = ({ addNewNote }) => {
+const Header = ({ addNewNote, deleteNote, enableEdit, disaled }) => {
   return (
     <header className={css.header}>
-      <HeaderButtonSet addNewNote={addNewNote} />
+      <HeaderButtonSet
+        addNewNote={addNewNote}
+        deleteNote={deleteNote}
+        enableEdit={enableEdit}
+        disaled={disaled}
+      />
       <SearchBox />
     </header>
   );
