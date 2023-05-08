@@ -15,7 +15,11 @@ const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
           {editMode === false && currentNoteLength > 0 ? (
             <p>{text}</p>
           ) : (
-            <textarea className={css.textarea} onChange={textValue}></textarea>
+            <textarea
+              className={css.textarea}
+              onChange={textValue}
+              defaultValue={"dsa"}
+            ></textarea>
           )}
         </>
       )}
