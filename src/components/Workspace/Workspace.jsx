@@ -1,22 +1,23 @@
-import { useState } from "react";
 import css from "./Workspace.module.css";
 
-const Workspace = ({ currentNote, editMode, editNote }) => {
-  const { text, date, id } = currentNote;
-  const [currentText, setCurrentText] = useState({text});
+const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
+  const { text, date } = currentNote;
 
-  const a = e => {
-    setCurrentText(e.target.value); 
-  }
-  editNote(currentText, id)
-  
+  const textValue = (e) => {
+    getText(e.target.value);
+  };
+
   return (
     <div className={css.wrapper}>
-      <p>{date}</p>
-      {editMode === false ? (
-        <p>{text}</p>
-      ) : (
-        <textarea className={css.textarea} defaultValue={text} onChange={a}></textarea>
+      {currentNoteLength > 0 && (
+        <>
+          <p>{date}</p>
+          {editMode === false && currentNoteLength > 0 ? (
+            <p>{text}</p>
+          ) : (
+            <textarea className={css.textarea} onChange={textValue}></textarea>
+          )}
+        </>
       )}
     </div>
   );
