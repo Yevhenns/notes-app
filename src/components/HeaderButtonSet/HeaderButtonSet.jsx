@@ -1,9 +1,14 @@
+import { useContext } from "react";
+import Context from "../../Context";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { BiEdit } from "react-icons/bi";
 import css from "./HeaderButtonSet.module.css";
 
-const HeaderButtonSet = ({ addNewNote, deleteNote, enableEdit, disaled }) => {
+const HeaderButtonSet = () => {
+  const value = useContext(Context);
+  const { addNewNote, deleteNote, enableEdit, disabled } = value;
+
   return (
     <div className={css.buttonSet}>
       <button type="button" className={css.button} onClick={addNewNote}>
@@ -13,7 +18,7 @@ const HeaderButtonSet = ({ addNewNote, deleteNote, enableEdit, disaled }) => {
         type="button"
         className={css.button}
         onClick={deleteNote}
-        disabled={disaled}
+        disabled={disabled}
       >
         <RiDeleteBin4Line />
       </button>
@@ -21,7 +26,7 @@ const HeaderButtonSet = ({ addNewNote, deleteNote, enableEdit, disaled }) => {
         type="button"
         className={css.button}
         onClick={enableEdit}
-        disabled={disaled}
+        disabled={disabled}
       >
         <BiEdit />
       </button>

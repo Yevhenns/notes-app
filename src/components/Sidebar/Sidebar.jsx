@@ -4,9 +4,17 @@ import css from "./Sidebar.module.css";
 const Sidebar = ({ notesAll, showNote }) => {
   return (
     <div className={css.sidebar}>
-      <ul>
-        {notesAll.map(({ id, text }) => {
-          return <ListItem key={id} id={id} text={text} showNote={showNote} />;
+      <ul className={css.sidebarList}>
+        {notesAll.map(({ id, text, date }) => {
+          return (
+            <ListItem
+              key={id}
+              id={id}
+              text={text}
+              showNote={showNote}
+              date={date}
+            />
+          );
         })}
       </ul>
     </div>

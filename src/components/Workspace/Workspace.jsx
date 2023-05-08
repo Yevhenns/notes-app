@@ -1,15 +1,23 @@
 import css from "./Workspace.module.css";
 
-const Workspace = ({ currentNote, editMode }) => {
-  const { id, text } = currentNote;
+const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
+  const { text, date } = currentNote;
+
+  const textValue = (e) => {
+    getText(e.target.value);
+  };
 
   return (
     <div className={css.wrapper}>
-      <p>{id}</p>
-      {editMode === false ? (
-        <p>{text}</p>
-      ) : (
-        <textarea className={css.textarea} defaultValue={text}></textarea>
+      {currentNoteLength > 0 && (
+        <>
+          <p>{date}</p>
+          {editMode === false && currentNoteLength > 0 ? (
+            <p>{text}</p>
+          ) : (
+            <textarea className={css.textarea} onChange={textValue}></textarea>
+          )}
+        </>
       )}
     </div>
   );

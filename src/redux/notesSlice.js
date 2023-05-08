@@ -16,6 +16,19 @@ const notesSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
+    editText(state, action) {
+      const currentItemIndex = state.notesAll.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      const currentItem = state.notesAll.find(
+        (element) => element.id === action.payload.id
+      );
+      currentItem.text = action.payload.text;
+      const newArray = [...state.notesAll];
+      const newArray1 = newArray.splice(currentItemIndex, 1, currentItem);
+
+      console.log(newArray1);
+    },
   },
 });
 
@@ -25,3 +38,4 @@ export const getNotesAll = (state) => state.notes.notesAll;
 
 export const { addNewItem } = notesSlice.actions;
 export const { deleteItem } = notesSlice.actions;
+export const { editText } = notesSlice.actions;

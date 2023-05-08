@@ -1,6 +1,9 @@
-const ListItem = ({ id, text, showNote }) => {
+import css from "./ListItem.module.css";
+
+const ListItem = ({ id, text, date, showNote }) => {
   return (
-    <li onClick={() => showNote(id)}>
+    <li className={css.listItem} onClick={() => showNote(id)}>
+      <p>{date}</p>
       <p>{text}</p>
     </li>
   );
