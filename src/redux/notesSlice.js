@@ -26,8 +26,6 @@ const notesSlice = createSlice({
       currentItem.text = action.payload.text;
       const newArray = [...state.notesAll];
       const newArray1 = newArray.splice(currentItemIndex, 1, currentItem);
-
-      console.log(newArray1);
     },
   },
 });

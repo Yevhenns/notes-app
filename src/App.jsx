@@ -36,7 +36,7 @@ const App = () => {
   }, [notesAll.length, currentNoteLength]);
 
   useEffect(() => {
-    if (currentNoteId) {
+    if (currentNoteId && currentText) {
       const id = currentNoteId;
       const text = currentText;
       dispatch(editText({ text, id }));
@@ -51,12 +51,14 @@ const App = () => {
       text: "",
     };
     dispatch(addNewItem(newItem));
+    setCurrentText("");
   };
 
   const showNote = (id) => {
     const currentEl = notesAll.find((element) => element.id === id);
     setCurrentNote(currentEl);
     setEditMode(false);
+    setCurrentText("");
   };
 
   const deleteNote = () => {
