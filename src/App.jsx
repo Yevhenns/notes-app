@@ -3,7 +3,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Workspace from "./components/Workspace/Workspace";
 import css from "./App.module.css";
 import { useDispatch } from "react-redux";
-import { addNewItem, deleteItem, getNotesAll } from "./redux/notesSlice";
+import { addNewItem, deleteItem, editText, getNotesAll } from "./redux/notesSlice";
 import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -11,24 +11,27 @@ import { useEffect, useState } from "react";
 const App = () => {
   const [currentNote, setCurrentNote] = useState({});
   const [editMode, setEditMode] = useState(false);
-  const [disaled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const notesAll = useSelector(getNotesAll);
 
   const dispatch = useDispatch();
 
+  const currentNoteLength = Object.keys(currentNote).length;
+
   useEffect(() => {
-    if (notesAll.length === 0) {
+    if (notesAll.length === 0 || currentNoteLength === 0) {
       setDisabled(true);
-    }
-    if (notesAll.length > 0) {
+    } else {
       setDisabled(false);
     }
-  }, [notesAll.length]);
+  }, [notesAll.length, currentNoteLength]);
 
   const addNewNote = () => {
+    let date = new Date().toISOString().slice(0, 19);
     const newItem = {
       id: nanoid(),
+      date: date,
       text: "as",
     };
     dispatch(addNewItem(newItem));
@@ -42,13 +45,18 @@ const App = () => {
 
   const deleteNote = () => {
     dispatch(deleteItem(currentNote.id));
+    setCurrentNote({});
   };
 
   const enableEdit = () => {
-    if (Object.keys(currentNote).length > 0) {
+    if (currentNoteLength > 0) {
       setEditMode(true);
     }
   };
+
+  const editNote = (text, id) => {
+    dispatch(editText({text, id}))
+  }
 
   return (
     <div className={css.wrapper}>
@@ -56,11 +64,11 @@ const App = () => {
         addNewNote={addNewNote}
         deleteNote={deleteNote}
         enableEdit={enableEdit}
-        disaled={disaled}
+        disabled={disabled}
       />
       <div className={css.mainContainer}>
         <Sidebar notesAll={notesAll} showNote={showNote} />
-        <Workspace currentNote={currentNote} editMode={editMode} />
+        <Workspace currentNote={currentNote} editMode={editMode} editNote={editNote}/>
       </div>
     </div>
   );

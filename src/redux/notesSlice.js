@@ -16,6 +16,10 @@ const notesSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
+    editText(state, action){ 
+      // const currentItem = state.notes     
+      console.log(action.payload.id);
+    }
   },
 });
 
@@ -25,3 +29,4 @@ export const getNotesAll = (state) => state.notes.notesAll;
 
 export const { addNewItem } = notesSlice.actions;
 export const { deleteItem } = notesSlice.actions;
+export const { editText } = notesSlice.actions;
