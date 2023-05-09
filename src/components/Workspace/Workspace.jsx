@@ -1,4 +1,4 @@
-import css from "./Workspace.module.css";
+import css from "./Workspace.module.scss";
 
 const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
   const { text, date } = currentNote;
@@ -18,7 +18,7 @@ const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
             <textarea
               className={css.textarea}
               onChange={textValue}
-              defaultValue={"dsa"}
+              defaultValue={text}
             ></textarea>
           )}
         </>

@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Workspace from "./components/Workspace/Workspace";
-import css from "./App.module.css";
+import css from "./App.module.scss";
 import { useDispatch } from "react-redux";
 import {
   addNewItem,
@@ -19,6 +19,7 @@ const App = () => {
   const [editMode, setEditMode] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [currentText, setCurrentText] = useState("");
+  const [filterValue, setFilterValue] = useState("");
 
   const notesAll = useSelector(getNotesAll);
 
@@ -71,15 +72,21 @@ const App = () => {
       setEditMode(true);
     }
   };
+
   const getText = (text) => {
     setCurrentText(text);
   };
+
+  const searchByName = (searchText) => {
+    setFilterValue(searchText.toLowerCase())
+  }
 
   const value = {
     addNewNote,
     deleteNote,
     enableEdit,
     disabled,
+    searchByName
   };
 
   return (
@@ -87,12 +94,12 @@ const App = () => {
       <div className={css.wrapper}>
         <Header />
         <div className={css.mainContainer}>
-          <Sidebar notesAll={notesAll} showNote={showNote} />
+          <Sidebar notesAll={notesAll} showNote={showNote} filterValue={filterValue}/>
           <Workspace
             currentNote={currentNote}
             editMode={editMode}
             getText={getText}
-            currentNoteLength={currentNoteLength}
+            currentNoteLength={currentNoteLength}          
           />
         </div>
       </div>

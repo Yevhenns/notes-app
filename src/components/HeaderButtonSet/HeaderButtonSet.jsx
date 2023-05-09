@@ -3,7 +3,7 @@ import Context from "../../Context";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { BiEdit } from "react-icons/bi";
-import css from "./HeaderButtonSet.module.css";
+import css from "./HeaderButtonSet.module.scss";
 
 const HeaderButtonSet = () => {
   const value = useContext(Context);

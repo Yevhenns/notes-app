@@ -1,6 +1,6 @@
 import HeaderButtonSet from "../HeaderButtonSet/HeaderButtonSet";
 import SearchBox from "../SearchBox/SearchBox ";
-import css from "./Header.module.css";
+import css from "./Header.module.scss";
 
 const Header = () => {
   return (
