@@ -13,7 +13,7 @@ const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
         <>
           <p>{date}</p>
           {editMode === false && currentNoteLength > 0 ? (
-            <p>{text}</p>
+            <p className={css.noteText}>{text}</p>
           ) : (
             <textarea
               className={css.textarea}

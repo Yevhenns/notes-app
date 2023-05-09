@@ -4,16 +4,18 @@ import css from "./SearchBox.module.scss";
 
 const SearchBox = () => {
   const value = useContext(Context);
-  const {searchByName} = value;
+  const { searchByName } = value;
 
   const textValue = (e) => {
     searchByName(e.target.value);
   };
 
   return (
-    <>
-      <input className={css.input} placeholder="Search" onChange={textValue}></input>
-    </>
+    <input
+      className={css.input}
+      placeholder="Search"
+      onChange={textValue}
+    ></input>
   );
 };
 

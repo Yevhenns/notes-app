@@ -4,6 +4,9 @@
   flex-direction: column;
 }
 .mainContainer {
-  display: flex;
-  flex: auto;  
+  height: 100vh;
+  @media screen and (min-width: 480px) {
+    display: flex;
+    flex: auto;
+  }
 }

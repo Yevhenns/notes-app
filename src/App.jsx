@@ -13,6 +13,9 @@ import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Context from "./Context";
+import { useMediaQuery } from "react-responsive";
+import { Box } from "@mui/material";
+import SearchBox from "./components/SearchBox/SearchBox ";
 
 const App = () => {
   const [currentNote, setCurrentNote] = useState({});
@@ -20,6 +23,7 @@ const App = () => {
   const [disabled, setDisabled] = useState(false);
   const [currentText, setCurrentText] = useState("");
   const [filterValue, setFilterValue] = useState("");
+  const [menu, setMenu] = useState(false);
 
   const notesAll = useSelector(getNotesAll);
 
@@ -27,6 +31,9 @@ const App = () => {
 
   const currentNoteLength = Object.keys(currentNote).length;
   const currentNoteId = currentNote.id;
+
+  const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
+  const tablet = useMediaQuery({ query: "(min-width: 480px)" });
 
   useEffect(() => {
     if (notesAll.length === 0 || currentNoteLength === 0) {
@@ -60,6 +67,7 @@ const App = () => {
     setCurrentNote(currentEl);
     setEditMode(false);
     setCurrentText("");
+    setMenu(false);
   };
 
   const deleteNote = () => {
@@ -78,29 +86,56 @@ const App = () => {
   };
 
   const searchByName = (searchText) => {
-    setFilterValue(searchText.toLowerCase())
-  }
+    setFilterValue(searchText.toLowerCase());
+  };
+
+  const toggleMenu = () => setMenu((value) => !value);
+  const closeMenu = () => setMenu(false);
 
   const value = {
     addNewNote,
     deleteNote,
     enableEdit,
     disabled,
-    searchByName
+    searchByName,
   };
 
   return (
     <Context.Provider value={value}>
       <div className={css.wrapper}>
-        <Header />
+        <Header toggleMenu={toggleMenu} closeMenu={closeMenu} menu={menu} />
         <div className={css.mainContainer}>
-          <Sidebar notesAll={notesAll} showNote={showNote} filterValue={filterValue}/>
-          <Workspace
-            currentNote={currentNote}
-            editMode={editMode}
-            getText={getText}
-            currentNoteLength={currentNoteLength}          
-          />
+          {menu && beforeTablet && (
+            <Box
+              sx={{
+                height: "100vh",
+                padding: "20px",
+                textAlign: "center",
+              }}
+            >
+              <SearchBox />
+              <Sidebar
+                notesAll={notesAll}
+                showNote={showNote}
+                filterValue={filterValue}
+              />
+            </Box>
+          )}
+          {tablet && (
+            <Sidebar
+              notesAll={notesAll}
+              showNote={showNote}
+              filterValue={filterValue}
+            />
+          )}
+          {tablet && (
+            <Workspace
+              currentNote={currentNote}
+              editMode={editMode}
+              getText={getText}
+              currentNoteLength={currentNoteLength}
+            />
+          )}
         </div>
       </div>
     </Context.Provider>
