@@ -1,0 +1,13 @@
+.sidebar {
+  padding: 5px;
+  background-color: azure;
+  @media screen and (min-width: 480px) {
+    padding: 15px;
+    width: 30vw;
+  }
+}
+.sidebarList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

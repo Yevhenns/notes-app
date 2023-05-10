@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   transition: box-shadow 250ms linear;
-}
-.button:hover {
-  box-shadow: 10px 5px 5px grey;
+  &:hover {
+    box-shadow: 10px 5px 5px grey;
+  }
 }

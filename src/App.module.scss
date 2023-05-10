@@ -1,0 +1,12 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.mainContainer {
+  flex: auto;
+  @media screen and (min-width: 480px) {
+    display: flex;
+    flex: auto;
+  }
+}

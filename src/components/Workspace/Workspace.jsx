@@ -1,4 +1,4 @@
-import css from "./Workspace.module.css";
+import css from "./Workspace.module.scss";
 
 const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
   const { text, date } = currentNote;
@@ -13,12 +13,13 @@ const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
         <>
           <p>{date}</p>
           {editMode === false && currentNoteLength > 0 ? (
-            <p>{text}</p>
+            <p className={css.noteText}>{text}</p>
           ) : (
             <textarea
               className={css.textarea}
               onChange={textValue}
-              defaultValue={"dsa"}
+              defaultValue={text}
+              placeholder="Your text..."
             ></textarea>
           )}
         </>

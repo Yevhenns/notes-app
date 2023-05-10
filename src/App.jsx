@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Workspace from "./components/Workspace/Workspace";
-import css from "./App.module.css";
+import css from "./App.module.scss";
 import { useDispatch } from "react-redux";
 import {
   addNewItem,
@@ -13,12 +13,17 @@ import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Context from "./Context";
+import { useMediaQuery } from "react-responsive";
+import { Box } from "@mui/material";
+import SearchBox from "./components/SearchBox/SearchBox ";
 
 const App = () => {
   const [currentNote, setCurrentNote] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [currentText, setCurrentText] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+  const [menu, setMenu] = useState(false);
 
   const notesAll = useSelector(getNotesAll);
 
@@ -26,6 +31,9 @@ const App = () => {
 
   const currentNoteLength = Object.keys(currentNote).length;
   const currentNoteId = currentNote.id;
+
+  const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
+  const tablet = useMediaQuery({ query: "(min-width: 480px)" });
 
   useEffect(() => {
     if (notesAll.length === 0 || currentNoteLength === 0) {
@@ -43,6 +51,9 @@ const App = () => {
     }
   }, [currentNoteId, currentText, dispatch]);
 
+  useEffect(() => {
+    if (tablet) setMenu(false);
+  }, [tablet]);
   const addNewNote = () => {
     let date = new Date().toISOString().slice(0, 19);
     const newItem = {
@@ -59,6 +70,7 @@ const App = () => {
     setCurrentNote(currentEl);
     setEditMode(false);
     setCurrentText("");
+    setMenu(false);
   };
 
   const deleteNote = () => {
@@ -71,29 +83,55 @@ const App = () => {
       setEditMode(true);
     }
   };
+
   const getText = (text) => {
     setCurrentText(text);
   };
+
+  const searchByName = (searchText) => {
+    setFilterValue(searchText.toLowerCase());
+  };
+
+  const toggleMenu = () => setMenu((value) => !value);
+  const closeMenu = () => setMenu(false);
 
   const value = {
     addNewNote,
     deleteNote,
     enableEdit,
     disabled,
+    searchByName,
+    notesAll,
+    showNote,
+    filterValue,
   };
 
   return (
     <Context.Provider value={value}>
       <div className={css.wrapper}>
-        <Header />
+        <Header toggleMenu={toggleMenu} closeMenu={closeMenu} menu={menu} />
         <div className={css.mainContainer}>
-          <Sidebar notesAll={notesAll} showNote={showNote} />
-          <Workspace
-            currentNote={currentNote}
-            editMode={editMode}
-            getText={getText}
-            currentNoteLength={currentNoteLength}
-          />
+          {menu && beforeTablet && (
+            <Box
+              sx={{
+                height: "100vh",
+                padding: "20px",
+                backgroundColor: "azure",
+              }}
+            >
+              <SearchBox />
+              <Sidebar />
+            </Box>
+          )}
+          {tablet && <Sidebar />}
+          {!menu && (
+            <Workspace
+              currentNote={currentNote}
+              editMode={editMode}
+              getText={getText}
+              currentNoteLength={currentNoteLength}
+            />
+          )}
         </div>
       </div>
     </Context.Provider>
