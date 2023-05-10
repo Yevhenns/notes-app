@@ -1,0 +1,7 @@
+.mainContainer {
+  flex: auto;
+  @media screen and (min-width: 480px) {
+    display: flex;
+    flex: auto;
+  }
+}

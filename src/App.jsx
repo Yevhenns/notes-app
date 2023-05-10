@@ -1,6 +1,4 @@
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Workspace from "./components/Workspace/Workspace";
 import css from "./App.module.scss";
 import { useDispatch } from "react-redux";
 import {
@@ -9,13 +7,11 @@ import {
   editText,
   getNotesAll,
 } from "./redux/notesSlice";
-import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Context from "./Context";
-import { useMediaQuery } from "react-responsive";
-import { Box } from "@mui/material";
-import SearchBox from "./components/SearchBox/SearchBox ";
+
+import Main from "./components/Main/Main";
 
 const App = () => {
   const [currentNote, setCurrentNote] = useState({});
@@ -31,9 +27,6 @@ const App = () => {
 
   const currentNoteLength = Object.keys(currentNote).length;
   const currentNoteId = currentNote.id;
-
-  const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
-  const tablet = useMediaQuery({ query: "(min-width: 480px)" });
 
   useEffect(() => {
     if (notesAll.length === 0 || currentNoteLength === 0) {
@@ -51,16 +44,11 @@ const App = () => {
     }
   }, [currentNoteId, currentText, dispatch]);
 
-  useEffect(() => {
-    if (tablet) setMenu(false);
-  }, [tablet]);
-  const addNewNote = () => {
-    let date = new Date().toISOString().slice(0, 19);
-    const newItem = {
-      id: nanoid(),
-      date: date,
-      text: "",
-    };
+  const burgerMenu = (isMenuOpen) => {
+    setMenu(isMenuOpen);
+  };
+
+  const addNewNote = (newItem) => {
     dispatch(addNewItem(newItem));
     setCurrentText("");
   };
@@ -70,7 +58,6 @@ const App = () => {
     setCurrentNote(currentEl);
     setEditMode(false);
     setCurrentText("");
-    setMenu(false);
   };
 
   const deleteNote = () => {
@@ -92,9 +79,6 @@ const App = () => {
     setFilterValue(searchText.toLowerCase());
   };
 
-  const toggleMenu = () => setMenu((value) => !value);
-  const closeMenu = () => setMenu(false);
-
   const value = {
     addNewNote,
     deleteNote,
@@ -104,35 +88,18 @@ const App = () => {
     notesAll,
     showNote,
     filterValue,
+    menu,
+    currentNoteLength,
+    getText,
+    editMode,
+    currentNote,
   };
 
   return (
     <Context.Provider value={value}>
       <div className={css.wrapper}>
-        <Header toggleMenu={toggleMenu} closeMenu={closeMenu} menu={menu} />
-        <div className={css.mainContainer}>
-          {menu && beforeTablet && (
-            <Box
-              sx={{
-                height: "100vh",
-                padding: "20px",
-                backgroundColor: "azure",
-              }}
-            >
-              <SearchBox />
-              <Sidebar />
-            </Box>
-          )}
-          {tablet && <Sidebar />}
-          {!menu && (
-            <Workspace
-              currentNote={currentNote}
-              editMode={editMode}
-              getText={getText}
-              currentNoteLength={currentNoteLength}
-            />
-          )}
-        </div>
+        <Header burgerMenu={burgerMenu} />
+        <Main />
       </div>
     </Context.Provider>
   );
