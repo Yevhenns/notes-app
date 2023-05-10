@@ -19,6 +19,7 @@ const Workspace = ({ currentNote, editMode, getText, currentNoteLength }) => {
               className={css.textarea}
               onChange={textValue}
               defaultValue={text}
+              placeholder="Your text..."
             ></textarea>
           )}
         </>

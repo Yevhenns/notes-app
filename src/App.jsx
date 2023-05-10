@@ -51,6 +51,9 @@ const App = () => {
     }
   }, [currentNoteId, currentText, dispatch]);
 
+  useEffect(() => {
+    if (tablet) setMenu(false);
+  }, [tablet]);
   const addNewNote = () => {
     let date = new Date().toISOString().slice(0, 19);
     const newItem = {
@@ -98,6 +101,9 @@ const App = () => {
     enableEdit,
     disabled,
     searchByName,
+    notesAll,
+    showNote,
+    filterValue,
   };
 
   return (
@@ -110,25 +116,15 @@ const App = () => {
               sx={{
                 height: "100vh",
                 padding: "20px",
-                textAlign: "center",
+                backgroundColor: "azure",
               }}
             >
               <SearchBox />
-              <Sidebar
-                notesAll={notesAll}
-                showNote={showNote}
-                filterValue={filterValue}
-              />
+              <Sidebar />
             </Box>
           )}
-          {tablet && (
-            <Sidebar
-              notesAll={notesAll}
-              showNote={showNote}
-              filterValue={filterValue}
-            />
-          )}
-          {tablet && (
+          {tablet && <Sidebar />}
+          {!menu && (
             <Workspace
               currentNote={currentNote}
               editMode={editMode}

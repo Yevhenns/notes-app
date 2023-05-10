@@ -1,7 +1,12 @@
+import { useContext } from "react";
+import Context from "../../Context";
 import ListItem from "../ListItem/ListItem";
 import css from "./Sidebar.module.scss";
 
-const Sidebar = ({ notesAll, showNote, filterValue }) => {
+const Sidebar = () => {
+  const value = useContext(Context);
+  const { notesAll, showNote, filterValue } = value;
+
   const filteredArray = notesAll.filter((item) =>
     item.text.toLowerCase().includes(filterValue)
   );
@@ -16,7 +21,7 @@ const Sidebar = ({ notesAll, showNote, filterValue }) => {
               id={id}
               text={text}
               showNote={showNote}
-              date={date}
+              date={date}              
             />
           );
         })}

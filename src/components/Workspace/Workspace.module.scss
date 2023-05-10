@@ -1,7 +1,8 @@
 .wrapper {
-  height: 100%;
   padding: 15px;
-  border: 1px solid tomato;
+  @media screen and (max-width: 479px) {
+    height: 100%;
+  }
   @media screen and (min-width: 480px) {
     width: 70vw;
   }
