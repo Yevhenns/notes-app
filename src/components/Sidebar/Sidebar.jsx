@@ -21,7 +21,7 @@ const Sidebar = () => {
               id={id}
               text={text}
               showNote={showNote}
-              date={date}              
+              date={date}
             />
           );
         })}

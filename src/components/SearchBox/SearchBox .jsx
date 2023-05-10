@@ -11,11 +11,7 @@ const SearchBox = () => {
   };
 
   return (
-    <input
-      className={css.input}
-      placeholder="Search"
-      onChange={textValue}
-    ></input>
+    <input className={css.input} placeholder="Search" onChange={textValue} />
   );
 };
 
