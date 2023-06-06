@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useContext } from "react";
+import Context from "../../Context";
 import HeaderButtonSet from "../HeaderButtonSet/HeaderButtonSet";
 import SearchBox from "../SearchBox/SearchBox ";
 import { IconButton } from "@mui/material";
@@ -7,7 +9,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import css from "./Header.module.scss";
 
-const Header = ({ burgerMenu }) => {
+const Header = () => {
+  const value = useContext(Context);
+  const { burgerMenu, editMode, currentText, currentNoteLength } = value;
+
   const [menu, setMenu] = useState(false);
 
   const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
@@ -20,6 +25,18 @@ const Header = ({ burgerMenu }) => {
   useEffect(() => {
     burgerMenu(menu);
   }, [burgerMenu, menu]);
+
+  useEffect(() => {
+    if (editMode) {
+      setMenu(true);
+    }
+  }, [editMode]);
+
+  useEffect(() => {
+    if (currentText === null || currentNoteLength === 0) {
+      setMenu(false);
+    }
+  }, [currentNoteLength, currentText]);
 
   const toggleMenu = () => setMenu((value) => !value);
 

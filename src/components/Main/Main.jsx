@@ -9,7 +9,7 @@ import css from "./Main.module.scss";
 
 const Main = () => {
   const value = useContext(Context);
-  const { menu } = value;
+  const { menu, notesAll } = value;
 
   const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
   const tablet = useMediaQuery({ query: "(min-width: 480px)" });
@@ -24,12 +24,21 @@ const Main = () => {
             backgroundColor: "azure",
           }}
         >
-          <SearchBox />
-          <Sidebar />
+          <Workspace />
         </Box>
       )}
-      {tablet && <Sidebar />}
-      {!menu && <Workspace />}
+      {!menu && beforeTablet && notesAll.length !== 0 && (
+        <>
+          <SearchBox />
+          <Sidebar />
+        </>
+      )}
+      {tablet && (
+        <>
+          <Sidebar />
+          <Workspace />
+        </>
+      )}
     </main>
   );
 };
