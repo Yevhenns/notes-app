@@ -68,7 +68,6 @@ const App = () => {
   const enableEdit = () => {
     if (currentNoteLength > 0) {
       setEditMode(true);
-      //
       setCurrentText(currentNote.text);
     }
   };
@@ -82,21 +81,21 @@ const App = () => {
   };
 
   const value = {
-    addNewNote,
-    deleteNote,
-    enableEdit,
+    currentNote,
+    editMode,
     disabled,
-    searchByName,
-    notesAll,
-    showNote,
+    currentText,
     filterValue,
     menu,
+    notesAll,
     currentNoteLength,
-    getText,
-    editMode,
-    currentNote,
     burgerMenu,
-    currentText,
+    addNewNote,
+    showNote,
+    deleteNote,
+    enableEdit,
+    getText,
+    searchByName,
   };
 
   return (
