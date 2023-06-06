@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   addNewItem,
@@ -12,8 +12,10 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import css from "./App.module.scss";
 
+type TypeNote = { id: string; text: string; date: string };
+
 const App = () => {
-  const [currentNote, setCurrentNote] = useState({});
+  const [currentNote, setCurrentNote] = useState({} as TypeNote);
   const [editMode, setEditMode] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [currentText, setCurrentText] = useState(null);
@@ -47,12 +49,12 @@ const App = () => {
     setMenu(isMenuOpen);
   };
 
-  const addNewNote = (newItem) => {
+  const addNewNote = (newItem: TypeNote) => {
     dispatch(addNewItem(newItem));
     setCurrentText(null);
   };
 
-  const showNote = (id) => {
+  const showNote = (id: string) => {
     const currentEl = notesAll.find((element) => element.id === id);
     setCurrentNote(currentEl);
     setEditMode(false);
@@ -71,7 +73,7 @@ const App = () => {
     }
   };
 
-  const getText = (text) => {
+  const getText = (text: string) => {
     setCurrentText(text);
   };
 

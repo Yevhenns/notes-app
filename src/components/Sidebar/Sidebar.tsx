@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import Context from "../../Context";
 import ListItem from "../ListItem/ListItem";
 import css from "./Sidebar.module.scss";

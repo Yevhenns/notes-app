@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type TypeNotesAll = { id: string; text: string; date: string }[];
+
 const initialState = {
-  notesAll: [],
+  notesAll: [] as TypeNotesAll,
 };
 
 const notesSlice = createSlice({

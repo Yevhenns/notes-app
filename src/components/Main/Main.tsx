@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { useMediaQuery } from "react-responsive";
 import Context from "../../Context";
 import SearchBox from "../SearchBox/SearchBox ";
