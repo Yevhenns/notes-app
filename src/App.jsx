@@ -17,7 +17,7 @@ const App = () => {
   const [currentNote, setCurrentNote] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState(null);
   const [filterValue, setFilterValue] = useState("");
   const [menu, setMenu] = useState(false);
 
@@ -37,7 +37,7 @@ const App = () => {
   }, [notesAll.length, currentNoteLength]);
 
   useEffect(() => {
-    if (currentNoteId && currentText) {
+    if (currentText !== null) {
       const id = currentNoteId;
       const text = currentText;
       dispatch(editText({ text, id }));
@@ -50,14 +50,14 @@ const App = () => {
 
   const addNewNote = (newItem) => {
     dispatch(addNewItem(newItem));
-    setCurrentText("");
+    setCurrentText(null);
   };
 
   const showNote = (id) => {
     const currentEl = notesAll.find((element) => element.id === id);
     setCurrentNote(currentEl);
     setEditMode(false);
-    setCurrentText("");
+    setCurrentText(null);
   };
 
   const deleteNote = () => {

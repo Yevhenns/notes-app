@@ -23,9 +23,11 @@ const notesSlice = createSlice({
       const currentItem = state.notesAll.find(
         (element) => element.id === action.payload.id
       );
-      currentItem.text = action.payload.text;
-      const newArray = [...state.notesAll];
-      newArray.splice(currentItemIndex, 1, currentItem);
+      if (currentItem) {
+        currentItem.text = action.payload.text;
+        const newArray = [...state.notesAll];
+        newArray.splice(currentItemIndex, 1, currentItem);
+      }
     },
   },
 });
