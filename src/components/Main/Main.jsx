@@ -9,7 +9,7 @@ import css from "./Main.module.scss";
 
 const Main = () => {
   const value = useContext(Context);
-  const { menu, currentNoteLength, getText, editMode, currentNote } = value;
+  const { menu } = value;
 
   const beforeTablet = useMediaQuery({ query: "(max-width: 479px)" });
   const tablet = useMediaQuery({ query: "(min-width: 480px)" });
@@ -29,14 +29,7 @@ const Main = () => {
         </Box>
       )}
       {tablet && <Sidebar />}
-      {!menu && (
-        <Workspace
-          currentNote={currentNote}
-          editMode={editMode}
-          getText={getText}
-          currentNoteLength={currentNoteLength}
-        />
-      )}
+      {!menu && <Workspace />}
     </main>
   );
 };
