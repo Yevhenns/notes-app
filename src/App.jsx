@@ -1,5 +1,4 @@
-import Header from "./components/Header/Header";
-import css from "./App.module.scss";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   addNewItem,
@@ -8,10 +7,10 @@ import {
   getNotesAll,
 } from "./redux/notesSlice";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import Context from "./Context";
-
+import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import css from "./App.module.scss";
 
 const App = () => {
   const [currentNote, setCurrentNote] = useState({});
