@@ -68,6 +68,8 @@ const App = () => {
   const enableEdit = () => {
     if (currentNoteLength > 0) {
       setEditMode(true);
+      //
+      setCurrentText(currentNote.text);
     }
   };
 
@@ -93,12 +95,14 @@ const App = () => {
     getText,
     editMode,
     currentNote,
+    burgerMenu,
+    currentText,
   };
 
   return (
     <Context.Provider value={value}>
       <div className={css.wrapper}>
-        <Header burgerMenu={burgerMenu} />
+        <Header />
         <Main />
       </div>
     </Context.Provider>
