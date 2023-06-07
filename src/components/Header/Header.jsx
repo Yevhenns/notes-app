@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import Context from "../../Context";

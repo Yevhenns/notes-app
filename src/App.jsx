@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   addNewItem,
   deleteItem,
   editText,
   getNotesAll,
 } from "./redux/notesSlice";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Context from "./Context";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import css from "./App.module.scss";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
-
-type TypeNote = { id: string; text: string; date: string };
 
 const App = () => {
-  const [currentNote, setCurrentNote] = useState({} as TypeNote);
+  const [currentNote, setCurrentNote] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [currentText, setCurrentText] = useState<null | string>(null);
+  const [currentText, setCurrentText] = useState(null);
   const [filterValue, setFilterValue] = useState("");
   const [menu, setMenu] = useState(false);
 
-  const notesAll = useAppSelector(getNotesAll);
+  const notesAll = useSelector(getNotesAll);
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const currentNoteLength = Object.keys(currentNote).length;
   const currentNoteId = currentNote.id;
@@ -46,16 +43,16 @@ const App = () => {
     }
   }, [currentNoteId, currentText, dispatch]);
 
-  const burgerMenu = (isMenuOpen: boolean) => {
+  const burgerMenu = (isMenuOpen) => {
     setMenu(isMenuOpen);
   };
 
-  const addNewNote = (newItem: TypeNote) => {
+  const addNewNote = (newItem) => {
     dispatch(addNewItem(newItem));
     setCurrentText(null);
   };
 
-  const showNote = (id: string) => {
+  const showNote = (id) => {
     const currentEl = notesAll.find((element) => element.id === id);
     setCurrentNote(currentEl);
     setEditMode(false);
@@ -74,11 +71,11 @@ const App = () => {
     }
   };
 
-  const getText = (text: string) => {
+  const getText = (text) => {
     setCurrentText(text);
   };
 
-  const searchByName = (searchText: string) => {
+  const searchByName = (searchText) => {
     setFilterValue(searchText.toLowerCase());
   };
 

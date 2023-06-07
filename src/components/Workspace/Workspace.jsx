@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Context from "../../Context";
 import css from "./Workspace.module.scss";
 
@@ -7,7 +7,7 @@ const Workspace = () => {
   const { currentNote, editMode, getText, currentNoteLength } = value;
   const { text, date } = currentNote;
 
-  const textValue = (e: { target: { value: string; }; }) => {
+  const textValue = (e) => {
     getText(e.target.value);
   };
 
