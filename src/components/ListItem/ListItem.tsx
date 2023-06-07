@@ -1,3 +1,4 @@
+import React from "react";
 import css from "./ListItem.module.scss";
 
 const ListItem = ({ id, text, date, showNote }) => {

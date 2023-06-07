@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import Context from "../../Context";
 import css from "./SearchBox.module.scss";
 
@@ -6,7 +6,7 @@ const SearchBox = () => {
   const value = useContext(Context);
   const { searchByName } = value;
 
-  const textValue = (e) => {
+  const textValue = (e: { target: { value: string; }; }) => {
     searchByName(e.target.value);
   };
 
