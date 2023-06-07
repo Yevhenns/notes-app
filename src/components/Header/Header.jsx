@@ -5,8 +5,8 @@ import Context from "../../Context";
 import HeaderButtonSet from "../HeaderButtonSet/HeaderButtonSet";
 import SearchBox from "../SearchBox/SearchBox ";
 import { IconButton } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import css from "./Header.module.scss";
 
 const Header = () => {
